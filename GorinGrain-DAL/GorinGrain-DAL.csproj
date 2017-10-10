@@ -46,6 +46,7 @@
     <Compile Include="Interfaces\IuserInfoDO.cs" />
     <Compile Include="LocationDataAccess.cs" />
     <Compile Include="Interfaces\ILocationInfoDO.cs" />
+    <Compile Include="Models\GitExample.cs" />
     <Compile Include="Models\LocationDO.cs" />
     <Compile Include="Models\ProducerDO.cs" />
     <Compile Include="Models\ShipmentDO.cs" />
