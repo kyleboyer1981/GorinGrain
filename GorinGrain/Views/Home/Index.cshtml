@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+    }
+</style>
+
+<link href="~/HomepageStyle.css" rel="stylesheet" />
+
+<div class="jumbotron" style="background-image: url(http://gannonre.com/wp-content/uploads/2014/04/farmers-shaking-hands-small.jpg); background-size: cover; ">
+    <h1 style="font-size: 80px; font-style:italic; color:greenyellow">GGG</h1>
+    <p class="lead" style="color:black; font-size:40px">Gorin Grain Group</p>
+    <p class="lead" style="color:black">Growing with you!</p>
+    @if (Session["UserName"] == null)
+    {
+        <div style="color:red; float:right">Please login for full site access</div>
+    }
+    else
+    {
+        //show nothing, user is logged in and has site access
+    }
+
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div style="color:blue">Today's Market Prices</div>
+        <iframe frameborder="0" scrolling="no" height="192" width="500" allowtransparency="true" marginwidth="0" marginheight="0" src="https://sslcomrates.forexprostools.com/index.php?force_lang=1&pairs_ids=961618;959199;8918;8919;8915;8916;8917;&header-text-color=%23FFFFFF&curr-name-
+                color=%230059b0&inner-text-color=%23000000&green-text-color=%232A8215&green-background=%23B7F4C2&red-text-color=%23DC0001&red-background=%23FFE2E2&inner-border-color=%23CBCBCB&border-color=%23cbcbcb&bg1=%23F6F6F6&bg2=%23ffffff&open=hide&last_update=hide"></iframe><br /><span style="font-size: 11px;color: #333333;text-decoration: none;">Commodities are powered by <a href="https://www.investing.com/" rel="nofollow" target="_blank" style="font-size: 11px;color: #06529D; font-weight: bold;" class="underline_link">Investing.com</a></span>
+    </div>
+
+    <div class="col-md-6">
+        <div>Click the weather icon for your farm's forecast!!</div>
+        <a href="https://www.accuweather.com/en/us/south-gorin-mo/63543/weather-forecast/2091744" class="aw-widget-legal">
+            <!--
+            By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at https://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at https://www.accuweather.com/en/privacy.
+            -->
+        </a><div id="awcc1504626591314" class="aw-widget-current" data-locationkey="2091744" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1504626591314"></div>
+        <script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--<h2>Weather</h2>
+        <p>Click the button below to get our current conditions and a local forecast.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Weather &raquo;</a></p>-->
+<!-- <h2>Corn and Soybeans </h2>
+        <p>
+            Click below to navigate to the Chicago Board of Trade site and see current prices for corn and soybeans.
+        </p>
+        <p><a class="btn btn-default" href="http://futures.tradingcharts.com/marketquotes/ZC.html?exchange">Corn and Beans Pricing &raquo;</a></p>
+    </div>
+    <div class="col-md-4"style="background-color:lightblue">
+        <h2>Wheat</h2>
+        <p>For current Kansas City Board wheat prices, please click below.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Wheat Pricing &raquo;</a></p>
+    </div>-->

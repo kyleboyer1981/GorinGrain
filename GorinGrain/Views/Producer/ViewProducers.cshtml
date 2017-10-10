@@ -1,0 +1,68 @@
+﻿@using GorinGrain.Models
+@model GorinGrain.ViewModels.ProducerVM
+@{
+    ViewBag.Title = "View Producers";
+}
+<style type="text/css">
+    body {
+        background: url(http://media.istockphoto.com/videos/farmer-in-grain-field-examining-crop-video-id180006688?s=640x640);
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+</style>
+
+<h2>View Producers</h2>
+
+<table class="table table-condensed " id="LocationsList">
+    <tbody>
+
+        <tr>
+
+            <th>Company Name</th>
+            <th>Contact Name</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Shipments</th>
+            @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+            {
+                <th>Update</th>
+                <th>Delete</th>
+            }
+            else
+            {
+                //not authorized
+            }
+        </tr>
+        <!--Loop through producer object list and place each in row-->
+        @foreach (ProducerPO producer in Model.ProducerList)
+            {
+            <tr>
+
+                <td>@producer.CompanyName</td>
+                <td>@producer.ContactName</td>
+                <td>@producer.Phone</td>
+                <td>@producer.Address</td>
+                <td>@Html.ActionLink("View Shipments", "ViewShipmentsByProducer", "Shipment", new { ProducerID = producer.ProducerID }, null)</td>
+                <!--Conditional to only show edit functions for admins-->
+                @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+                {
+                    <td>@Html.ActionLink("Update", "UpdateProducer", "Producer", new { ProducerID = producer.ProducerID }, new { onclick = "return confirm('Are you sure?');" })</td>
+                    <td>@Html.ActionLink("Delete", "DeleteProducer", "Producer", new { ProducerID = producer.ProducerID }, new { onclick = "return confirm('Are you sure?');" })</td>
+                }
+                else
+                {
+                    //not authorized for this view
+                }
+
+
+            </tr>
+            }
+    </tbody>
+</table>
+
+<h1 class="badge" style="background-color:darkgoldenrod; font-size:larger">
+    @Html.LabelFor(model => model.Producer.CompanyName, "Current Top Producer" )
+    @Html.TextBoxFor(model => Model.Producer.CompanyName)
+   </h1>
+
+

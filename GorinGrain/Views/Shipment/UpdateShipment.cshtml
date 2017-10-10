@@ -1,0 +1,64 @@
+﻿@model GorinGrain.ViewModels.ShipmentVM
+@{
+    ViewBag.Title = "UpdateShipment";
+}
+<style type="text/css">
+    body {
+        background: url(http://media.istockphoto.com/videos/farmer-in-grain-field-examining-crop-video-id180006688?s=640x640);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<h2>Update Shipment</h2>
+@using (Html.BeginForm("UpdateShipment", "Shipment", FormMethod.Post))
+{
+    <!--define seperate text box, label, and entry validation for each item // form control makes boxes right size-->
+    @Html.HiddenFor(model => Model.Shipment.ShipmentID, Model.Shipment.ShipmentID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Shipment.LocationID)
+        @Html.DropDownListFor(model => Model.Shipment.LocationID, Model.Shipment.LocationDDL)
+        @Html.ValidationMessageFor(model => model.Shipment.LocationID, "", new { @class = "text-danger" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.Shipment.ProducerID)
+        @Html.DropDownListFor(model => Model.Shipment.ProducerID, Model.Shipment.ProducerDDL)
+        @Html.ValidationMessageFor(model => model.Shipment.ProducerID, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Shipment.Product)
+        @Html.TextBoxFor(model => model.Shipment.Product, new { @class = "form-control", @placeholder = "Commodity name..." })
+        @Html.ValidationMessageFor(model => model.Shipment.Product, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Shipment.QuantityInBu)
+        @Html.TextBoxFor(model => model.Shipment.QuantityInBu, "", new { @class = "form-control", @placeholder = "Quantity (bu)...", @Value = "760" })
+        @Html.ValidationMessageFor(model => model.Shipment.QuantityInBu, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Shipment.PricePerBushel)
+        @Html.TextBoxFor(model => model.Shipment.PricePerBushel, "", new { @class = "form-control", @placeholder = "$ per Bu..." })
+        @Html.ValidationMessageFor(model => model.Shipment.PricePerBushel, "", new { @class = "text-danger" })
+    </div>
+
+    <!--spot for error message, if needed-->
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Shipment, Model.ErrorMessage, new { @class = "text-danger" })
+    </div>
+
+            <div class="form-group">
+                <!--button to submit form-->
+                <input class="btn btn-success" type="submit" value="submit" style="background-color:blue"/>
+            </div>
+
+
+
+}
+
+

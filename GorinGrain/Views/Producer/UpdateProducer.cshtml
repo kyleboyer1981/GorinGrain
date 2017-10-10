@@ -1,0 +1,57 @@
+﻿@model GorinGrain.ViewModels.ProducerVM
+
+@{
+    ViewBag.Title = "Update Producer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    body {
+        background-image: url(http://static1.squarespace.com/static/55b595d2e4b0cc4be26e07b8/55d13a44e4b05f1da673f893/5636d992e4b09ef9b62510cd/1459709463477/?format=1000w);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<h2>Update Producer</h2>
+@using (Html.BeginForm("UpdateProducer", "Producer", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.Producer.ProducerID, Model.Producer.ProducerID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Producer.CompanyName)
+        @Html.TextBoxFor(model => Model.Producer.CompanyName, "", new { @class = "form-control", @placeholder = "Company Name..." })
+        @Html.ValidationMessageFor(model => Model.Producer.CompanyName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Producer.ContactName)
+        @Html.TextBoxFor(model => model.Producer.ContactName, new { @class = "form-control", @placeholder = "Business Contact Name..." })
+        @Html.ValidationMessageFor(model => model.Producer.ContactName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Producer.Phone)
+        @Html.TextBoxFor(model => model.Producer.Phone, "", new { @class = "form-control", @placeholder = "Phone..." })
+        @Html.ValidationMessageFor(model => model.Producer.Phone, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Producer.Address)
+        @Html.TextBoxFor(model => model.Producer.Address, "", new { @class = "form-control", @placeholder = "Business Address" })
+        @Html.ValidationMessageFor(model => model.Producer.Address, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Producer, Model.ErrorMessage, new { @class = "text-danger" })
+    </div>
+
+    <!--Button to submit-->
+    <div class="form-group">
+        <!--   button is of type submit, and value is the name of it   -->
+        <input class="btn btn-success" type="submit" value="submit" new { onclick="return confirm('Do you wish to update the record with these changes?');" } />
+    </div>
+
+}
+
+

@@ -1,0 +1,58 @@
+﻿@model GorinGrain.ViewModels.UserVM
+@{
+    ViewBag.Title = "Register";
+}
+
+<style type="text/css">
+    body{
+        background:url(https://static1.squarespace.com/static/50631261e4b0e9530e2c53a7/52fed07de4b008058a45895f/56944b8dbfe873142675ea01/1474243048241/Grain-Elevators-Photos-Montana.jpg);
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+</style>
+
+<h2 style="color:white">Register Here!</h2>
+
+
+
+@using (Html.BeginForm("AddUser", "User", FormMethod.Post))
+{
+    <!--define seperate text box, label, and entry validation for each item // form control makes boxes right size-->
+    <div class="form-group" style="color:white">
+        @Html.LabelFor(model => Model.User.FirstName)
+        @Html.TextBoxFor(model => model.User.FirstName, "", new { @class = "form-control", @placeholder = "Your first name...." })
+        @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+
+    </div>
+    <!--define seperate text box for each item -->
+    <div class="form-group" style="color:white">
+        @Html.LabelFor(model => Model.User.LastName)
+        @Html.TextBoxFor(model => model.User.LastName, new { @class = "form-control", @placeholder = "Your last name....." })
+        @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+    </div>
+    <!--define seperate text box for each item -->
+    <div class="form-group" style="color:white">
+        @Html.LabelFor(model => Model.User.UserName)
+        @Html.TextBoxFor(model => model.User.UserName, "", new { @class = "form-control", @placeholder = "Pick a user name..." })
+        @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group" style="color:white">
+        @Html.LabelFor(model => Model.User.Password)
+        @Html.TextBoxFor(model => model.User.Password, "", new { @class = "form-control", @placeholder = "Your password..." })
+        @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.User, Model.ErrorMessage, new { @class = "text-danger" })
+    </div>
+    <!--Button to submit-->
+    <div class="form-group">
+        <!--button is of type submit, and value is the name of it-->
+        <input class="btn btn-success" type="submit" value="Register" />
+    </div>
+
+
+
+}

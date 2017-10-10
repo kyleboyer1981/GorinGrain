@@ -1,0 +1,64 @@
+﻿@using GorinGrain.Models
+@model GorinGrain.ViewModels.ShipmentVM
+@{
+    ViewBag.Title = "ViewShipmentsByProducer";
+}
+
+<h2>Shipments By Producer</h2>
+<body background="https://cdn.vox-cdn.com/thumbor/yrSWzRS7YlU3pB1sgcVVB-1Y5t4=/0x142:3000x1830/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/46990314/cruze_farm_edited.0.0.jpg" , background-size:100%;>
+    <table class="table table-condensed" id="ShipmentsByProducer">
+        <tbody>
+
+            <tr>
+
+                <th>Shipment ID</th>
+                <th>Location ID</th>
+                <th>Product</th>
+                <th>ProducerID</th>
+                <th>Quantity (bushels)</th>
+                <th>Price per Bushel($)</th>
+                @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+            {
+                    <th>Update</th>
+                    <th>Delete</th>
+                }
+                else
+                {
+                    //not authorized
+                }
+            </tr>
+
+            @foreach (ShipmentPO shipment in Model.ShipmentList)
+            {
+                <tr>
+
+                    <td>@shipment.ShipmentID</td>
+                    <td>@shipment.LocationID</td>
+                    <td>@shipment.Product</td>
+                    <td>@shipment.ProducerID</td>
+                    <td>@shipment.QuantityInBu</td>
+                    <td>@shipment.PricePerBushel</td>
+
+                    @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+                {
+                        <td>
+                            @Html.ActionLink("Update", "UpdateShipment", "Shipment", new { ShipmentID = shipment.ShipmentID },
+                           new { onclick = "return confirm('Update this shipment?');" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteShipment", "Shipment", new { ShipmentID = shipment.ShipmentID },
+                           new { onclick = "return confirm('Are you sure you want to delete a shipment?  This action CAN NOT BE UNDONE');" })
+                        </td>
+                    }
+                    else
+                    {
+                        //not authorized for this view
+                    }
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+

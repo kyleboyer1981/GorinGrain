@@ -1,0 +1,87 @@
+﻿@using GorinGrain.Models
+@model GorinGrain.ViewModels.LocationVM
+@{
+    ViewBag.Title = "ViewLocations";
+}
+<style type="text/css">
+    body {
+        background: url(https://cdn.vox-cdn.com/thumbor/yrSWzRS7YlU3pB1sgcVVB-1Y5t4=/0x142:3000x1830/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/46990314/cruze_farm_edited.0.0.jpg);
+        background-repeat: no-repeat;
+    }
+</style>
+<h2>Our Locations</h2>
+
+<table class="table table-condensed" id="LocationsList">
+    <tbody>
+
+        <tr>
+
+            <th>Location Name</th>
+            <th>Location Address</th>
+            <th>Phone Number</th>
+
+            @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+            {
+                <th>Shipments</th>
+            }
+            else
+            {
+                //not authorized
+            }
+
+            @if (Session["UserName"] != null && (int)Session["UserLevel"] == 1)
+            {
+                <th>Update</th>
+                <th>Delete</th>
+            }
+            else
+            {
+                //not authorized
+            }
+
+        </tr>
+
+        @foreach (LocationPO location in Model.LocationList)
+            {
+            <tr>
+
+                <td>@location.LocationName</td>
+                <td>@location.Address</td>
+                <td>@location.Phone</td>
+
+                @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+                {
+                    <td>
+                        @Html.ActionLink("View Shipments", "ViewShipmentsByLocation", "Shipment", new { locationID = location.LocationID }, null)
+                    </td>
+                }
+                else
+                {
+                    //not authorized for this view
+                }
+
+                @if (Session["UserName"] != null && (int)Session["UserLevel"] == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Update", "UpdateLocation", "Location", new { locationID = location.LocationID },
+                           new { onclick = "return confirm('Do you wish to update this Location?');" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteLocation", "Location", new { locationID = location.LocationID },
+                           new { onclick = "return confirm('Deleting a location will also delete all of the shipments TO that location.  Are you sure you want to proceed with the delete?');" })
+                    </td>
+                }
+
+
+
+
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

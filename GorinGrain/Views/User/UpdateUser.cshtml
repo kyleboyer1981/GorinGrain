@@ -1,0 +1,60 @@
+﻿@model GorinGrain.ViewModels.UserVM
+
+@{
+    ViewBag.Title = "Update User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    body {
+        background: url(https://images.fineartamerica.com/images-medium-large/corn-field-with-silos-elena-elisseeva.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+    <h2>Update User Info</h2>
+    @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => Model.User.UserID, Model.User.UserID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.User.FirstName)
+            @Html.TextBoxFor(model => Model.User.FirstName, "", new { @class = "form-control", @placeholder = "First Name..." })
+            @Html.ValidationMessageFor(model => Model.User.FirstName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.User.LastName)
+            @Html.TextBoxFor(model => model.User.LastName, new { @class = "form-control", @placeholder = "Last Name..." })
+            @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.User.UserName)
+            @Html.TextBoxFor(model => model.User.UserName, "", new { @class = "form-control", @placeholder = "User Name..." })
+            @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.User.Password)
+            @Html.TextBoxFor(model => model.User.Password, "", new { @class = "form-control", @placeholder = "Password" })
+            @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.User.UserLevel)
+            @Html.TextBoxFor(model => model.User.UserLevel, "", new { @class = "form-control", @placeholder = "User Level(1-3 only)" })
+            @Html.ValidationMessageFor(model => model.User.UserLevel, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.ValidationMessageFor(model => model.User, Model.ErrorMessage, new { @class = "text-danger" })
+        </div>
+
+    <!--Button to submit-->
+        <div class="form-group">
+            <!--   button is of type submit, and value is the name of it   -->
+            <input class="btn btn-success" type="submit" value="submit" />
+        </div>
+   
+    }

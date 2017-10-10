@@ -1,0 +1,52 @@
+﻿@model GorinGrain.ViewModels.UserVM
+@{
+    ViewBag.Title = "Login";
+}
+<link href="~/LoginStyle.css" rel="stylesheet" />
+<style type="text/css" ?>
+    .form-horizontal {
+        padding-top: 50px;
+        padding-left: 10%;
+        padding-bottom: 150px;
+    }
+
+    body {
+        background: url(https://images.fineartamerica.com/images-medium-large/corn-field-with-silos-elena-elisseeva.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<h1>Welcome back!</h1>
+
+<div class="form-container" />
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    <body background="https://images.fineartamerica.com/images-medium-large/corn-field-with-silos-elena-elisseeva.jpg">
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => Model.User.UserName)
+                @Html.TextBoxFor(model => Model.User.UserName, "", new { @class = "form-control", @placeholder = "User-Name" })
+                @Html.ValidationMessageFor(model => Model.User.UserName, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.User.Password)
+                @Html.PasswordFor(model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", @Value = string.IsNullOrWhiteSpace(Model.User.Password) ? string.Empty : Model.User.Password })
+                @Html.ValidationMessageFor(model => Model.User.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login" style="background-color:lightgray" />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => Model.RememberMe)
+                @Html.CheckBoxFor(model => Model.RememberMe)
+            </div>
+
+        </div>
+    </body>
+}
+

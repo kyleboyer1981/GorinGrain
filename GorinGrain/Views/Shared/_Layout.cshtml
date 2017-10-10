@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body background-size:100%;>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Gorin Grain Group", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Session["UserName"] != null)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Locations <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li>@Html.ActionLink("View Locations", "ViewLocations", "Location")</li>
+                                @if (Session["Username"] != null && (int)Session["UserLevel"] == 1)
+                                {
+                                    <li>@Html.ActionLink("Add New Location", "AddLocation", "Location")</li>
+                                }
+                                else
+                                {
+                                    <!--show nothing here, not authorized-->
+                                }
+                                                            </ul>
+                        </li>
+                    }
+                   
+                    @if (Session["UserName"] != null && (int)Session["UserLevel"] <= 2)
+                    {
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Shipments <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("View/Edit Shipments", "ViewShipments", "Shipment")</li>
+                                <li>@Html.ActionLink("Add Shipment", "AddShipment", "Shipment")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Producers <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("View/Edit Producers", "ViewProducers", "Producer")</li>
+                                @if (Session["Username"] != null && (int)Session["UserLevel"] <= 2)
+                                {
+                                    <li>@Html.ActionLink("Add Producer", "AddProducer", "Producer")</li>
+                                }
+                                else
+                                {
+                                    <!--show nothing here, not authorized-->
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                    @if (Session["UserName"] != null && (int)Session["UserLevel"] == 1)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Users <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("View/Edit Users", "ViewUsers", "User")</li>
+                                <li>@Html.ActionLink("Add User", "AddUser", "User")</li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        //do not show if not Admin
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["UserName"] != null)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">@Session["UserName"].ToString() <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Log Out", "Logout", "User")</li>
+
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "User")</li>
+                        <li>@Html.ActionLink("Register", "AddUser", "User")</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Gorin Grain Group LLC</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,3 @@
+Procedure or function 'VIEW_SHIPMENTS_BY_LOCATION' expects parameter '@LocationID', which was not supplied.
+Procedure or function 'ADD_SHIPMENT' expects parameter '@LocationID', which was not supplied.
+Procedure or function 'ADD_SHIPMENT' expects parameter '@LocationID', which was not supplied.

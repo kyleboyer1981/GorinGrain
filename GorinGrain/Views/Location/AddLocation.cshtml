@@ -1,0 +1,54 @@
+﻿@model GorinGrain.ViewModels.LocationVM
+@{
+    ViewBag.Title = "AddLocation";
+}
+<style type="text/css">
+    body {
+        background: url(http://media.istockphoto.com/videos/farmer-in-grain-field-examining-crop-video-id180006688?s=640x640);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<h2>Add Location</h2>
+@using (Html.BeginForm("AddLocation", "Location", FormMethod.Post))
+{
+    <!--define seperate text box, label, and entry validation for each item // form control makes boxes right size-->
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Location.LocationName)
+        @Html.TextBoxFor(model => model.Location.LocationName, "", new { @class = "form-control", @placeholder = "Facility Name...." })
+        @Html.ValidationMessageFor(model => model.Location.LocationName, "", new { @class = "text-danger" })
+
+    </div>
+    <!--define seperate text box for each item -->
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Location.Address)
+        @Html.TextBoxFor(model => model.Location.Address, new { @class = "form-control", @placeholder = "Address....." })
+        @Html.ValidationMessageFor(model => model.Location.Address, "", new { @class = "text-danger" })
+    </div>
+    <!--define seperate text box for each item -->
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Location.Phone)
+        @Html.TextBoxFor(model => model.Location.Phone, "", new { @class = "form-control", @placeholder = "Phone Number..." })
+        @Html.ValidationMessageFor(model => model.Location.Phone, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Location.MaxCapacity)
+        @Html.TextBoxFor(model => model.Location.MaxCapacity, "", new { @class = "form-control", @placeholder = "Maximum Capacity in Bu..." })
+        @Html.ValidationMessageFor(model => model.Location.MaxCapacity, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Location, Model.ErrorMessage, new { @class = "text-danger" })
+    </div>
+    <!--Button to submit-->
+    <div class="form-group">
+        <!--button is of type submit, and value is the name of it-->
+        <input class="btn btn-success" type="submit" value="submit" />
+    </div>
+
+
+
+}

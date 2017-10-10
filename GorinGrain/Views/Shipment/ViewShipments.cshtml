@@ -1,0 +1,80 @@
+﻿@using GorinGrain.Models
+@model GorinGrain.ViewModels.ShipmentVM
+@{
+    ViewBag.Title = "ViewShipments";
+}
+
+<style type="text/css">
+    .table-scroll {
+        height: 350px;
+        overflow: auto;
+    }
+</style>
+
+<h2>All Shipments</h2>
+<body background="https://cdn.vox-cdn.com/thumbor/yrSWzRS7YlU3pB1sgcVVB-1Y5t4=/0x142:3000x1830/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/46990314/cruze_farm_edited.0.0.jpg" , background-size:100%;>
+    <div class="table-scroll">
+        <table class="table table-condensed" id="LocationsList">
+            <tbody>
+
+                <tr class="scroll-header">
+
+                    <th>Shipment ID</th>
+                    <th>Location ID</th>
+                    <th>Product</th>
+                    <th>ProducerID</th>
+                    <th>Quantity (bushels)</th>
+                    <th>Price per Bushel($)</th>
+                    @if (Session["UserName"] != null && ((int)Session["UserLevel"] == 1 || (int)Session["UserLevel"] == 2))
+                    {
+                        <th>Update</th>
+                        <th>Delete</th>
+                    }
+                    else
+                    {
+                        //not authorized
+                    }
+                </tr>
+
+                @foreach (ShipmentPO shipment in Model.ShipmentList)
+            {
+                    <tr>
+                        <td>@shipment.ShipmentID</td>
+                        <td>
+                            @Html.ActionLink(shipment.LocationID.ToString(), "UpdateLocation", "Location", new { LocationID = shipment.LocationID },
+                            new { onclick = "return confirm('Would you like to view this Location?');", @style = "color:red" })
+                        </td>
+                        <td>@shipment.Product</td>
+                        <td>
+                            @Html.ActionLink(shipment.ProducerID.ToString(), "UpdateProducer", "Producer", new { ProducerID = shipment.ProducerID },
+                            new { onclick = "return confirm('Would you like to view this Producer?');", @style = "color:red" })
+                        </td>
+                        <td>@shipment.QuantityInBu</td>
+                        <td>@shipment.PricePerBushel</td>
+
+                        @if (Session["UserName"] != null && ((int)Session["UserLevel"] == 1 || (int)Session["UserLevel"] == 2))
+                        {
+                            <td>
+                                @Html.ActionLink("Update", "UpdateShipment", "Shipment", new { ShipmentID = shipment.ShipmentID },
+                            new { onclick = "return confirm('Update this shipment?');", @style = "color:red" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteShipment", "Shipment", new { ShipmentID = shipment.ShipmentID },
+                            new { onclick = "return confirm('Are you sure you want to delete a shipment?  This action CAN NOT BE UNDONE');", @style = "color:red" })
+                            </td>
+                        }
+                        else
+                        {
+                            //not authorized for this view
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+    <div>
+        To view shipments by Producer or Location, navigate to the view menu for either option at the top of this page.
+    </div>
+</body>

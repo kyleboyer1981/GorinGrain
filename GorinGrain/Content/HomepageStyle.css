@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.jumbotron{
+    background-image: url(http://assets.fwi.co.uk/Handshake-615x346.jpg) 
+}
+
+h1{
+    color: black 
+}
+
+p{
+    font:100;
+    color:bisque
+}
