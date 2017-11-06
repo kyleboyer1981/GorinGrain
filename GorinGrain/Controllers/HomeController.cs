@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+//Modify for git exercise
+
 namespace GorinGrain.Controllers
 {
     public class HomeController : Controller
@@ -25,7 +27,7 @@ namespace GorinGrain.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-            //just comment to change for GIT
+            
         }
     }
 }
